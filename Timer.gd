@@ -1,11 +1,13 @@
 extends Timer
-
-@export var newAntTimer = 30
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	wait_time = 15
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if is_stopped():
+		if wait_time > 5:
+			wait_time -= 1
+		start()
+	

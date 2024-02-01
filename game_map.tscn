@@ -16,13 +16,17 @@ offset_bottom = 646.0
 color = Color(0.560318, 0.87721, 0.651516, 1)
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
 script = ExtResource("2_th8bn")
 
 [node name="Ant" parent="." instance=ExtResource("1_0886c")]
 position = Vector2(274, 563)
 
 [node name="fruit" parent="." instance=ExtResource("3_o7qeg")]
-position = Vector2(359, 170)
+position = Vector2(621, 333)
 
 [node name="Ant2" parent="." instance=ExtResource("1_0886c")]
 position = Vector2(896, 545)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
