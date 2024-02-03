@@ -26,7 +26,4 @@ position = Vector2(274, 563)
 [node name="fruit" parent="." instance=ExtResource("3_o7qeg")]
 position = Vector2(621, 333)
 
-[node name="Ant2" parent="." instance=ExtResource("1_0886c")]
-position = Vector2(896, 545)
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
