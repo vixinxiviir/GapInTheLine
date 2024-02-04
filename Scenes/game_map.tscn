@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://by7y7rp3nucfr"]
 
-[ext_resource type="PackedScene" uid="uid://y00buqdu4h7x" path="res://ant.tscn" id="1_0886c"]
-[ext_resource type="Script" path="res://game_map.gd" id="1_a7krg"]
-[ext_resource type="Script" path="res://Timer.gd" id="2_th8bn"]
-[ext_resource type="PackedScene" uid="uid://cyg8x8ty8nk8" path="res://fruit.tscn" id="3_o7qeg"]
+[ext_resource type="PackedScene" uid="uid://y00buqdu4h7x" path="res://Scenes/ant.tscn" id="1_0886c"]
+[ext_resource type="Script" path="res://Scripts/game_map.gd" id="1_a7krg"]
+[ext_resource type="Script" path="res://Scripts/Timer.gd" id="2_th8bn"]
+[ext_resource type="PackedScene" uid="uid://cyg8x8ty8nk8" path="res://Scenes/fruit.tscn" id="3_o7qeg"]
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_a7krg")

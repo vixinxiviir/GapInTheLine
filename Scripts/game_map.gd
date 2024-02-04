@@ -10,6 +10,7 @@ var antNum = 3
 var fruitNum = 2
 var activeAnt : CharacterBody2D = null
 var activeFruit : Polygon2D = null
+var homePos = Vector2(550, 600)
 
 
 func switch_selection_mode():
@@ -52,14 +53,15 @@ func get_fruits():
 	var fruits = []
 	for child in children:
 		if child is Polygon2D:
-			fruits.append(child)
+			if child._cState == child.carriedStates.AVAILABLE:
+				fruits.append(child)
 	return(fruits)
 	
 func switch_fruit():
 	if activeFruit == null:
 		activeFruit = fruits[fruitsIndex]
 	else:
-		if fruitsIndex == len(fruits) - 1:
+		if fruitsIndex > len(fruits) - 1:
 			fruitsIndex = 0
 		else:
 			fruitsIndex += 1
@@ -76,9 +78,15 @@ func fetchFruit():
 	activeAnt._mState = activeAnt.movementStates.GET_FRUIT
 	activeAnt.targetFruit = activeFruit
 	
+func check_ant_home():
+	for ant in ants:
+		ant.returned_home.connect(spawn_fruit)
+		ant.returned_home.connect(spawn_ant)
+			
+			
 func spawn_ant():
 	print("Timeout!")
-	var antObject = load("res://ant.tscn")
+	var antObject = load("res://Scenes/ant.tscn")
 	var antInstance = antObject.instantiate()
 	antInstance.set_name('ant%s' % antNum)
 	antInstance.set_position(Vector2(randf_range(0, 600), randf_range(400, 600)))
@@ -86,7 +94,7 @@ func spawn_ant():
 	antNum += 1
 
 func spawn_fruit():
-	var fruitObject = load("res://fruit.tscn")
+	var fruitObject = load("res://Scenes/fruit.tscn")
 	var fruitInstance = fruitObject.instantiate()
 	fruitInstance.set_name('fruit%s' % fruitNum)
 	fruitInstance.set_position(Vector2(randf_range(0, 600), randf_range(0, 200)))
@@ -113,8 +121,11 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed('fetchFruit')\
 	and activeAnt != null\
-	and activeFruit != null:
+	and activeFruit != null\
+	and activeFruit._cState != activeFruit.carriedStates.CARRIED:
 		fetchFruit()
+	check_ant_home()
+	print(fruitsIndex)
 
 func _on_timer_timeout():
 	spawn_ant()
