@@ -27,14 +27,15 @@ func get_ants():
 	var ants = []
 	for child in children:
 		if child is CharacterBody2D:
-			ants.append(child)
+			if child._cState == child.carryStates.AVAILABLE:
+				ants.append(child)
 	return(ants)
 	
 func switch_ant():
 	if activeAnt == null:
 		activeAnt = ants[antsIndex]
 	else:
-		if antsIndex == len(ants) - 1:
+		if antsIndex >= len(ants) - 1:
 			antsIndex = 0
 		else:
 			antsIndex += 1
@@ -61,7 +62,7 @@ func switch_fruit():
 	if activeFruit == null:
 		activeFruit = fruits[fruitsIndex]
 	else:
-		if fruitsIndex > len(fruits) - 1:
+		if fruitsIndex >= len(fruits) - 1:
 			fruitsIndex = 0
 		else:
 			fruitsIndex += 1
@@ -122,7 +123,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed('fetchFruit')\
 	and activeAnt != null\
 	and activeFruit != null\
-	and activeFruit._cState != activeFruit.carriedStates.CARRIED:
+	and activeFruit._cState != activeFruit.carriedStates.CARRIED\
+	and activeAnt._cState != activeAnt.carryStates.CARRYING:
 		fetchFruit()
 	check_ant_home()
 	print(fruitsIndex)
