@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://y00buqdu4h7x"]
+[gd_scene load_steps=5 format=3 uid="uid://y00buqdu4h7x"]
 
 [ext_resource type="Script" path="res://Scripts/ant.gd" id="1_r7i0c"]
 [ext_resource type="Script" path="res://Scripts/antBody.gd" id="2_w61ba"]
+[ext_resource type="Script" path="res://Scenes/DeathTimer.gd" id="3_y62pw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tby4p"]
 radius = 1.41421
@@ -16,6 +17,10 @@ polygon = PackedVector2Array(-2, -6, 2, -6, 2, 6, -2, 6)
 script = ExtResource("2_w61ba")
 
 [node name="DeathTimer" type="Timer" parent="."]
+wait_time = 15.0
+script = ExtResource("3_y62pw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tby4p")
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

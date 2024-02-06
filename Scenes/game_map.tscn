@@ -21,9 +21,13 @@ autostart = true
 script = ExtResource("2_th8bn")
 
 [node name="Ant" parent="." instance=ExtResource("1_0886c")]
-position = Vector2(274, 563)
+position = Vector2(634, 532)
 
 [node name="fruit" parent="." instance=ExtResource("3_o7qeg")]
-position = Vector2(621, 333)
+position = Vector2(609, 193)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

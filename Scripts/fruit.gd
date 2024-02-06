@@ -2,9 +2,11 @@ extends Polygon2D
 
 enum selectionStates {UNSELECTED, SELECTED}
 enum carriedStates {AVAILABLE, CARRIED}
+enum targetedStates {UNTARGETED, TARGETED}
 
 var _sState : int = selectionStates.UNSELECTED
 var _cState : int = carriedStates.AVAILABLE
+var _tState : int = targetedStates.UNTARGETED
 func _ready():
 	self.set_color(Color(1,1,0,1))
 	

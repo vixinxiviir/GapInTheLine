@@ -10,8 +10,8 @@ var _cState : int = carryStates.AVAILABLE
 #var targetFruit : Polygon2D = null
 var children = get_children()
 var homePos = Vector2(550, 600)
-signal returned_home
-
+var isHome : bool = false
+var dead : bool = false
 
 
 
@@ -31,8 +31,9 @@ func _physics_process(delta):
 		self._mState = movementStates.IDLE
 		targetFruit.queue_free()
 		targetFruit = null
-		returned_home.emit()
-		self.queue_free()
+		self.isHome = true
+		print("Home!")
+		print(self.isHome)
 		
 	if self._sState == selectionStates.SELECTED:
 		antPolygon.set_color(Color(1,0,0,1))
@@ -52,6 +53,7 @@ func _physics_process(delta):
 		#look_at(homeDirection)
 		velocity = homeDirection * antSpeed
 		targetFruit._cState = targetFruit.carriedStates.CARRIED
+		targetFruit._sState = targetFruit.selectionStates.UNSELECTED
 		targetFruit.global_position = global_position	
 		targetFruit.set_color(Color(1,1,0,1))
 		
@@ -61,3 +63,8 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
+
+
+func _on_death_timer_timeout():
+	print("ded")
+	self.dead = true# Replace with function body.
